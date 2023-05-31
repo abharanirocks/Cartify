@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector,useDispatch } from "react-redux";
 import CartItem from '../../components/shop/CartItem';
 import * as cartActions from '../../store/actions/cart';
+import * as orderActions from '../../store/actions/orders';
 import Color from '../../constants/Color';
 
 const CartScreen = (props) => {
@@ -26,8 +27,7 @@ const CartScreen = (props) => {
   });
   
   // console.log("Cart item use selector------------------------------------------ ",cartItems)
-
-  
+  // console.log(cartItems.length)
   
   return (
     <View style={styles.screen}>
@@ -36,7 +36,10 @@ const CartScreen = (props) => {
         <Text style={styles.amount}>${cartTotalAmount.toFixed(2)}</Text>
         </Text>
         <Button color={Color.accent} title="Order Now" 
-        disabled={cartItems === undefined}
+        disabled={cartItems.length === 0}
+        onPress={() => {
+          dispatch(orderActions.addOrder(cartItems,cartTotalAmount));
+}}
         />
       </View>
       

@@ -1,5 +1,4 @@
 
-import { StyleSheet, Text, View } from 'react-native';
 import {createStore,combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import {  useFonts} from "expo-font";
@@ -7,9 +6,10 @@ import {  useFonts} from "expo-font";
 
 import productsReducer from './store/reducers/products';
 import cartReducer from './store/reducers/cart';
-import ShopNavigator from './navigation/ShopNavigator';
+import ordersReducer from './store/reducers/orders';
+import TabNavigator from './navigation/ShopNavigator';
 
-const rootReducer = combineReducers({products : productsReducer,cart:cartReducer});
+const rootReducer = combineReducers({products : productsReducer,cart:cartReducer, orders:ordersReducer});
 const store = createStore(rootReducer);
 
 export default function App() {
@@ -20,11 +20,13 @@ export default function App() {
   // if (!fontsLoaded) {
   //   return null;
   // }
+
   
   return (
     <Provider store={store}>
       {/* <Text>Open up App.js to start working on your app!</Text> */}
-      <ShopNavigator/>
+      {/* <ShopNavigator/> */}
+      <TabNavigator/>
       </Provider>
   );
 }
