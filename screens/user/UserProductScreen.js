@@ -38,6 +38,7 @@ const deleteHandler = (id) => {
             editProductHandler(itemData.item.id);
           }}
         >
+          <Text>yfyty</Text>
           <Button
             color={""}
             title="Edit"

@@ -64,19 +64,21 @@ const AdminNavigator = () => {
             ),
              headerRight: () => (
            <HeaderButtons  HeaderButtonComponent={HeaderBtn}>
-          <Item title="Menu" iconName='md-cart' onPress={() => navigation.navigate('CartScreen')} />
+          <Item title="Add" iconName='md-cart' onPress={() => navigation.navigate('EditProductScreen')} />
             </HeaderButtons>
             )
          
          })
         } />
-        <ProductStackNavigator.Screen name='EditProductScreen' component={EditProductScreen} options={""
-        //  ({navigation})=>({ headerLeft: () => (
-        //    <HeaderButtons  HeaderButtonComponent={HeaderBtn}>
-        //   <Item title="Menu" iconName='md-cart' onPress={() => navigation.navigate('CartScreen')} />
-        //     </HeaderButtons>
-        //     )
-        //  })
+        <ProductStackNavigator.Screen name='EditProductScreen' component={EditProductScreen} options={
+         ({route})=>( 
+          { title:route.params.title,
+            headerRight: () => (
+           <HeaderButtons  HeaderButtonComponent={HeaderBtn}>
+          <Item title="Menu" iconName='md-cart' onPress={() => navigation.navigate('CartScreen')} />
+            </HeaderButtons>
+            )
+         })
         } />
         </ProductStackNavigator.Navigator>
      
