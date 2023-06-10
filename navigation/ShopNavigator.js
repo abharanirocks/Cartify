@@ -1,6 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import ProductOverviewScreen from '../screens/shop/ProductOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
@@ -71,14 +70,20 @@ const AdminNavigator = () => {
          })
         } />
         <ProductStackNavigator.Screen name='EditProductScreen' component={EditProductScreen} options={
-         ({route})=>( 
-          { title:route.params.title,
+         ({route})=>{
+          //  const submitFn = route.params.submit;
+         return {
+            title:
+            route.params.productId ? 
+            'Edit Product'
+      : 
+      'Add Product',
             headerRight: () => (
            <HeaderButtons  HeaderButtonComponent={HeaderBtn}>
-          <Item title="Menu" iconName='md-cart' onPress={() => navigation.navigate('CartScreen')} />
+          <Item title="Menu" iconName='md-cart' onPress={""} />
             </HeaderButtons>
             )
-         })
+         }}
         } />
         </ProductStackNavigator.Navigator>
      

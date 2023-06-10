@@ -2,15 +2,21 @@ import { View, Text ,FlatList, Button, Alert } from 'react-native'
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import ProductItem from '../../components/shop/Productitem'
+import * as productsActions from '../../store/actions/products';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 const UserProductScreen = () => {
+      const navigation = useNavigation();
     const userProducts = useSelector(state => state.products.userProducts);
 console.log(userProducts)
 const dispatch = useDispatch();
 
-  const editProductHandler = id => {
-    props.navigation.navigate('EditProduct', { productId: id });
-  };
+  // const editProductHandler = id => {
+  //   navigation.navigate('EditProduct', { productId: id });
+  // };
+  // ()=>navigation.navigate('ProductDetailScreen',{productId:itemData.item.id,title:itemData.item.title})
 
 const deleteHandler = (id) => {
     Alert.alert('Are you sure?', 'Do you really want to delete this item?', [
@@ -35,7 +41,7 @@ const deleteHandler = (id) => {
           title={itemData.item.title}
           price={itemData.item.price}
           onSelect={() => {
-            editProductHandler(itemData.item.id);
+            ()=>navigation.navigate('EditProduct',{productId:itemData.item.id,title:itemData.item.title})
           }}
         >
           <Text>yfyty</Text>
@@ -43,7 +49,7 @@ const deleteHandler = (id) => {
             color={""}
             title="Edit"
             onPress={() => {
-              editProductHandler(itemData.item.id);
+            ()=>navigation.navigate('EditProduct',{productId:itemData.item.id,title:itemData.item.title})
             }}
           />
           <Button
