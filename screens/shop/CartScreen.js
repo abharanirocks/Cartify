@@ -5,10 +5,23 @@ import CartItem from '../../components/shop/CartItem';
 import * as cartActions from '../../store/actions/cart';
 import * as orderActions from '../../store/actions/orders';
 import Color from '../../constants/Color';
+import Constants from 'expo-constants'
+
 
 const CartScreen = (props) => {
   
   const cartTotalAmount = useSelector(state => state.cart.totalAmount);
+
+
+
+//   const [isLoading, setIsLoading] = useState(false);
+// const sendOrderHandler = async () => {
+//   setIsLoading(true);
+//   await dispatch(orderActions.addOrder(cartItems, cartTotalAmount));
+//   setIsLoading(false);
+// };
+
+
  
    const dispatch = useDispatch();
   const cartItems = useSelector(state => {
@@ -38,6 +51,7 @@ const CartScreen = (props) => {
         <Button color={Color.accent} title="Order Now" 
         disabled={cartItems.length === 0}
         onPress={() => {
+          // sendOrderHandler
           dispatch(orderActions.addOrder(cartItems,cartTotalAmount));
 }}
         />
@@ -67,7 +81,7 @@ const CartScreen = (props) => {
 export default CartScreen
 
 const styles = StyleSheet.create({
-  screen:{margin:20},
+  screen:{margin:20,marginTop:Constants.statusBarHeight*3},
   summary:{flexDirection:'row',
   alignItems:'center',
   justifyContent:'space-between',

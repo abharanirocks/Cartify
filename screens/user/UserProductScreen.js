@@ -1,18 +1,20 @@
-import { View, Text ,FlatList, Button, Alert } from 'react-native'
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import ProductItem from '../../components/shop/Productitem'
+import React from 'react';
+import { FlatList, Button, StyleSheet, Alert, View } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import Constants from 'expo-constants'
+import ProductItem from '../../components/shop/ProductItem';
+import * as productsActions from '../../store/actions/products';
+import { useNavigation } from '@react-navigation/native';
 
-const UserProductScreen = () => {
-    const userProducts = useSelector(state => state.products.userProducts);
-console.log(userProducts)
-const dispatch = useDispatch();
 
-  const editProductHandler = id => {
-    props.navigation.navigate('EditProduct', { productId: id });
-  };
+const UserProductsScreen = props => {
+  const userProducts = useSelector(state => state.products.userProducts);
+  const dispatch = useDispatch();
+    const navigation = useNavigation();
 
-const deleteHandler = (id) => {
+  
+
+  const deleteHandler = (id) => {
     Alert.alert('Are you sure?', 'Do you really want to delete this item?', [
       { text: 'No', style: 'default' },
       {
@@ -26,8 +28,9 @@ const deleteHandler = (id) => {
   };
 
   return (
+    <View style={styles.container}>
     <FlatList
-    data={userProducts}
+      data={userProducts}
       keyExtractor={item => item.id}
       renderItem={itemData => (
         <ProductItem
@@ -35,26 +38,56 @@ const deleteHandler = (id) => {
           title={itemData.item.title}
           price={itemData.item.price}
           onSelect={() => {
-            editProductHandler(itemData.item.id);
+    navigation.navigate('EditProductScreen', { productId: itemData.item.id });
           }}
         >
-          <Text>yfyty</Text>
           <Button
-            color={""}
             title="Edit"
             onPress={() => {
-              editProductHandler(itemData.item.id);
+    navigation.navigate('EditProductScreen', { productId: itemData.item.id });
             }}
           />
           <Button
-            color={""}
             title="Delete"
             onPress={deleteHandler.bind(this, itemData.item.id)}
           />
         </ProductItem>
       )}
-      />
-  )
-}
+    />
+    </View>
+  );
+};
+const styles = StyleSheet.create({
+  container: {
+    marginTop: Constants.statusBarHeight*1.5
+  }
+});
+// UserProductsScreen.navigationOptions = navData => {
+//   return {
+//     headerTitle: 'Your Products',
+//     headerLeft: (
+//       <HeaderButtons HeaderButtonComponent={HeaderButton}>
+//         <Item
+//           title="Menu"
+//           iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+//           onPress={() => {
+//             navData.navigation.toggleDrawer();
+//           }}
+//         />
+//       </HeaderButtons>
+//     ),
+//     headerRight: (
+//       <HeaderButtons HeaderButtonComponent={HeaderButton}>
+//         <Item
+//           title="Add"
+//           iconName={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+//           onPress={() => {
+//             navData.navigation.navigate('EditProduct');
+//           }}
+//         />
+//       </HeaderButtons>
+//     )
+//   };
+// };
 
-export default UserProductScreen
+export default UserProductsScreen;

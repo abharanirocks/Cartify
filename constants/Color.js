@@ -1,4 +1,4 @@
 export default {
-  primary: '#C2185B',
+  primary: '#EC5800',
   accent: '#FFC107'
 };
