@@ -6,21 +6,23 @@ import Colors from '../../constants/Color'
 const Productitem = (props) => {
   return (
     <View style={styles.product}>
-      <TouchableOpacity onPress={props.onSelect} activeOpacity={0.8} useForeground>
-      <View style={styles.imageContainer}>
-      <Image style ={styles.image} source={{uri: props.image}}/>
+      <TouchableOpacity
+        onPress={props.onSelect}
+        activeOpacity={0.8}
+        useForeground
+      >
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={{ uri: props.image }} />
         </View>
-      <View style={styles.details}>
-        <Text/>
-        <Text style={styles.title}>{props.title}</Text>
-        <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+        <View style={styles.details}>
+          <Text />
+          <Text style={styles.title}>{props.title}</Text>
+          <Text style={styles.price}>₹{props.price.toFixed(2)}</Text>
         </View>
-      <View style={styles.actions}>
-{props.children}
-       </View>
-    </TouchableOpacity>
+        <View style={styles.actions}>{props.children}</View>
+      </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 export default Productitem

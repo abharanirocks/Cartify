@@ -16,21 +16,25 @@ const ProductDetailScreen = ({navigation}) => {
   const selectedProduct = useSelector(state => state.products.availableProducts.find(prod => prod.id === productId));
   return (
     <ScrollView>
-    <View>
-      <Image style={styles.image} 
-      source={{uri:selectedProduct.imageUrl}}
-      />
-      <View style={styles.actions}>
-          <Button color={Color.primary} title='Add to Cart' 
-          onPress={()=>{
-            dispatch(cartActions.addToCart(selectedProduct))
-          }}/>
-      </View>
-      <Text style={styles.price}>${selectedProduct.price.toFixed(2)}</Text>
+      <View>
+        <Image
+          style={styles.image}
+          source={{ uri: selectedProduct.imageUrl }}
+        />
+        <View style={styles.actions}>
+          <Button
+            color={Color.primary}
+            title="Add to Cart"
+            onPress={() => {
+              dispatch(cartActions.addToCart(selectedProduct));
+            }}
+          />
+        </View>
+        <Text style={styles.price}>₹{selectedProduct.price.toFixed(2)}</Text>
         <Text style={styles.description}>{selectedProduct.description}</Text>
-    </View>
+      </View>
     </ScrollView>
-  )
+  );
 }
 
 export default ProductDetailScreen

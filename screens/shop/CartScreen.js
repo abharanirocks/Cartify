@@ -45,37 +45,39 @@ const CartScreen = (props) => {
   return (
     <View style={styles.screen}>
       <View style={styles.summary}>
-        <Text style={styles.summaryText}>Total: 
-        <Text style={styles.amount}>${cartTotalAmount.toFixed(2)}</Text>
+        <Text style={styles.summaryText}>
+          Total:
+          <Text style={styles.amount}>₹{cartTotalAmount.toFixed(2)}</Text>
         </Text>
-        <Button color={Color.accent} title="Order Now" 
-        disabled={cartItems.length === 0}
-        onPress={() => {
-          // sendOrderHandler
-          dispatch(orderActions.addOrder(cartItems,cartTotalAmount));
-}}
+        <Button
+          color={Color.accent}
+          title="Order Now"
+          disabled={cartItems.length === 0}
+          onPress={() => {
+            // sendOrderHandler
+            dispatch(orderActions.addOrder(cartItems, cartTotalAmount));
+          }}
         />
       </View>
-      
-    <FlatList
+
+      <FlatList
         data={cartItems}
-        keyExtractor={item => item.productId}
-        renderItem={itemData => (
+        keyExtractor={(item) => item.productId}
+        renderItem={(itemData) => (
           <CartItem
             quantity={itemData.item.quantity}
             title={itemData.item.productTitle}
             amount={itemData.item.sum}
             deletable
             onRemove={() => {
-              console.log("itemData.item.productId",itemData.item.productId)
+              console.log("itemData.item.productId", itemData.item.productId);
               dispatch(cartActions.removeFromCart(itemData.item.productId));
             }}
           />
         )}
       />
-      
     </View>
-  )
+  );
 }
 
 export default CartScreen
